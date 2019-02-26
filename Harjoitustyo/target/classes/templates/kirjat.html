@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Harjoitustyö - Jori Selin</title>
+<meta http-equiv="Content-type" content="text/html charset=UTF-8"/>
+</head>
+<body>
+
+	<h1>Sarjakuvat</h1>
+
+	<a href="/lisaa">Lisää kirja</a>
+
+	<table>
+		<tr>
+		    <td>Nimi:</td>
+		    <td>Albumi:</td>
+		    <td>ISBN:</td>
+		    <td>Sivumäärä:</td>
+		    <td>Kunto(1-5):</td>
+		    <td>Vuosi:</td>
+		    <td>Painos:</td>
+		</tr>  
+		<tr th:each = "kirja : ${kirjat}">
+			<td th:text="${kirja.nimi}"></td>
+			<td th:text="${kirja.albumi}"></td>
+			<td th:text="${kirja.isbn}"></td>
+			<td th:text="${kirja.sivumaara}"></td>
+			<td th:text="${kirja.kunto}"></td>
+			<td th:text="${kirja.vuosi}"></td>
+			<td th:text="${kirja.painos}"></td>
+		</tr>
+	</table>
+
+</body>
+</html>

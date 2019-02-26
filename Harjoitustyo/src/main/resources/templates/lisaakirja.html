@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Harjoitustyö - Jori Selin</title>
+<meta http-equiv="Content-type" content="text/html charset=UTF-8"/>
+</head>
+<body>
+
+	<h1>Lisää kirja</h1>
+	
+		<form th:object="${kirja}" th:action="@{save}" action="#" method="post">
+		
+		  	<label for="nimi">Nimi</label>
+			<input type="text" id="nimi" th:field="${kirja.nimi}" />
+			<label for="albumi">Albumi</label>
+			<input type="text" id="albumi" th:field="${kirja.albumi}" />
+			<label for="isbn">ISBN</label>
+			<input type="text" id="isbn" th:field="${kirja.isbn}" />
+			<label for="sivumaara">Sivumäärä</label>
+			<input type="text" id="sivumaara" th:field="${kirja.sivumaara}" />
+			<label for="kunto">Kunto</label>
+			<input type="text" id="kunto" th:field="${kirja.kunto}" />
+			<label for="vuosi">Vuosi</label>
+			<input type="text" id="vuosi" th:field="${kirja.vuosi}" />
+			<label for="painos">Painos</label>
+			<input type="text" id="painos" th:field="${kirja.painos}" />
+
+			<input type="submit" value="Save"></input>
+			
+		</form>
+	
+	<!-- <div style="clear: both; display: block; height: 10px;"></div> -->
+	
+</body>
+</html>

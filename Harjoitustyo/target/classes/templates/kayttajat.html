@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Harjoitustyö - Jori Selin</title>
+<meta http-equiv="Content-type" content="text/html charset=UTF-8"/>
+</head>
+<body>
+
+	<h1>Käyttäjät</h1>
+
+	   <table>
+		<tr>
+		    <th>Name</th>
+		</tr>  
+    	<tr th:each = "kayttaja : ${kayttajat}">
+    		<td th:text="${kayttaja.etunimi} + ' ' + ${kayttaja.sukunimi}"></td>		
+    	</tr>
+     </table>
+
+</body>
+</html>
