@@ -1,22 +1,46 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymeleaf.org">
+xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-<title>Harjoitustyö - Jori Selin</title>
-<meta http-equiv="Content-type" content="text/html charset=UTF-8"/>
+    <title>Harjoitustyö - Jori Selin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
+	<div class="col-md-11">
+		<a href="/kirjat" class="btn btn-default">Kirjat</a>
+	</div>
+	
+	<div class="col-md-1">
+		Hei, <span sec:authentication="name"></span>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-link"/>
+		</form>
+	</div>
 
+
+	<div class="container">
 	<h1>Käyttäjät</h1>
+	
+	<a sec:authorize="hasAuthority('ADMIN')" href="/lisaakayttaja" class="btn btn-success">+ Lisää käyttäjä</a>
+	<a href="/kayttajatrest" class="btn btn-warning">REST</a>
 
-	   <table>
+	   <table class="table">
 		<tr>
-		    <th>Name</th>
+			<th>Nimi</th>
+			<th>Käyttäjätunnus</th>
+		    <th>Rooli</th>
+		    <th></th>
 		</tr>  
     	<tr th:each = "kayttaja : ${kayttajat}">
-    		<td th:text="${kayttaja.etunimi} + ' ' + ${kayttaja.sukunimi}"></td>		
+    		<td th:text="${kayttaja.etunimi} + ' ' + ${kayttaja.sukunimi}"></td>
+    		<td th:text="${kayttaja.username}"></td>
+    		<td th:text="${kayttaja.rooli}"></td>
+    		<td sec:authorize="hasAuthority('ADMIN')" align="right"><a th:href="@{/poistakayttaja/{id}(id=${kayttaja.kayttaja_id})}" class="btn btn-danger">Poista</a></td>
     	</tr>
      </table>
+	</div>
+
 
 </body>
 </html>

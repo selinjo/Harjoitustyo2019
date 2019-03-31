@@ -1,34 +1,46 @@
 package kevat2019.Harjoitustyo.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "PO_Kayttajat") // Nimetään tietokannassa oleva taulu
 public class Kayttaja {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "kayttaja_id", nullable = false, updatable = false)
 	private Long kayttaja_id;
-	private String tunnus;
-	private String etunimi;
-	private String sukunimi;
-	private String salasana;
-	private Boolean admin;
 	
-	public Kayttaja() {
-		super();
-		
+	@Column(name = "username", nullable = false, unique = true)
+	private String username;
+	
+	@Column(name = "etunimi", nullable = false)
+	private String etunimi;
+	
+	@Column(name = "sukunimi", nullable = false)
+	private String sukunimi;
+	
+	@Column(name = "password", nullable = false)
+	private String passwordHash;
+	
+	@Column(name = "rooli", nullable = false)
+	private String rooli;
+
+	public Kayttaja() {	
 	}
 
-	public Kayttaja(Long kayttaja_id, String tunnus, String etunimi, String sukunimi, String salasana, Boolean admin) {
+	public Kayttaja(String username, String etunimi, String sukunimi, String passwordHash,
+			String rooli) {
 		super();
-		this.kayttaja_id = kayttaja_id;
-		this.tunnus = tunnus;
+		this.username = username;
 		this.etunimi = etunimi;
 		this.sukunimi = sukunimi;
-		this.salasana = salasana;
-		this.admin = admin;
+		this.passwordHash = passwordHash;
+		this.rooli = rooli;
 	}
 
 	public Long getKayttaja_id() {
@@ -39,12 +51,12 @@ public class Kayttaja {
 		this.kayttaja_id = kayttaja_id;
 	}
 
-	public String getTunnus() {
-		return tunnus;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setTunnus(String tunnus) {
-		this.tunnus = tunnus;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getEtunimi() {
@@ -63,27 +75,20 @@ public class Kayttaja {
 		this.sukunimi = sukunimi;
 	}
 
-	public String getSalasana() {
-		return salasana;
+	public String getPasswordHash() {
+		return passwordHash;
 	}
 
-	public void setSalasana(String salasana) {
-		this.salasana = salasana;
+	public void setPasswordHash(String passwordHash) {
+		this.passwordHash = passwordHash;
 	}
 
-	public Boolean getAdmin() {
-		return admin;
+	public String getRooli() {
+		return rooli;
 	}
 
-	public void setAdmin(Boolean admin) {
-		this.admin = admin;
-	}
-
-	@Override
-	public String toString() {
-		return "Kayttaja [kayttaja_id=" + kayttaja_id + ", tunnus=" + tunnus + ", etunimi=" + etunimi + ", sukunimi="
-				+ sukunimi + ", salasana=" + salasana + ", admin=" + admin + "]";
-	}
-	
+	public void setRooli(String rooli) {
+		this.rooli = rooli;
+	}	
 	
 }

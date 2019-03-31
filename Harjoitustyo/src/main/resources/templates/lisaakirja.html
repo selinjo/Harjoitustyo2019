@@ -1,36 +1,67 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymeleaf.org">
+xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-<title>Harjoitustyö - Jori Selin</title>
-<meta http-equiv="Content-type" content="text/html charset=UTF-8"/>
+    <title>Harjoitustyö - Jori Selin</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
-
-	<h1>Lisää kirja</h1>
-	
-		<form th:object="${kirja}" th:action="@{save}" action="#" method="post">
+	<div class="col-md-11">
 		
-		  	<label for="nimi">Nimi</label>
-			<input type="text" id="nimi" th:field="${kirja.nimi}" />
-			<label for="albumi">Albumi</label>
-			<input type="text" id="albumi" th:field="${kirja.albumi}" />
-			<label for="isbn">ISBN</label>
-			<input type="text" id="isbn" th:field="${kirja.isbn}" />
-			<label for="sivumaara">Sivumäärä</label>
-			<input type="text" id="sivumaara" th:field="${kirja.sivumaara}" />
-			<label for="kunto">Kunto</label>
-			<input type="text" id="kunto" th:field="${kirja.kunto}" />
-			<label for="vuosi">Vuosi</label>
-			<input type="text" id="vuosi" th:field="${kirja.vuosi}" />
-			<label for="painos">Painos</label>
-			<input type="text" id="painos" th:field="${kirja.painos}" />
+	</div>
+	
+	<div class="col-md-1">
+		Hei, <span sec:authentication="name"></span>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-link"/>
+		</form>
+	</div>
 
-			<input type="submit" value="Save"></input>
+	<div class="container">
+		<h1>Lisää kirja</h1>
+	
+		<form th:object="${kirjalomake}" th:action="@{tallennakirja}" action="#" method="post">
+			<div class="form-group">
+			  	<label for="nimi">Nimi</label>
+				<input type="text" id="nimi" th:field="*{nimi}" class="form-control"/>
+				<p class="alert alert-info" th:if="${#fields.hasErrors('nimi')}" th:errors="*{nimi}"></p>
+			</div>
+			<div class="form-group">
+				<label for="albumi">Albumi</label>
+				<input type="text" id="albumi" th:field="*{albumi}" class="form-control"/>
+				<p class="alert alert-info" th:if="${#fields.hasErrors('albumi')}" th:errors="*{albumi}"></p>
+			</div>
+			<div class="form-group">
+				<label for="isbn">ISBN</label>
+				<input type="text" id="isbn" th:field="*{isbn}" class="form-control"/>
+				<p class="alert alert-info" th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}"></p>
+			</div>
+			<div class="form-group">
+				<label for="sivumaara">Sivumäärä</label>
+				<input type="text" id="sivumaara" th:field="*{sivumaara}" class="form-control"/>
+				<p class="alert alert-info" th:if="${#fields.hasErrors('sivumaara')}" th:errors="*{sivumaara}"></p>
+			</div>
+			<div class="form-group">
+				<label for="kunto">Kunto (1-5)</label>
+				<input type="text" id="kunto" th:field="*{kunto}" class="form-control"/>
+				<p class="alert alert-info" th:if="${#fields.hasErrors('kunto')}" th:errors="*{kunto}"></p>
+			</div>
+			<div class="form-group">
+				<label for="vuosi">Vuosi</label>
+				<input type="text" id="vuosi" th:field="*{vuosi}" class="form-control"/>
+				<p class="alert alert-info" th:if="${#fields.hasErrors('vuosi')}" th:errors="*{vuosi}"></p>
+			</div>
+			<div class="form-group">
+				<label for="painos">Painos</label>
+				<input type="text" id="painos" th:field="*{painos}" class="form-control"/>
+				<p class="alert alert-info" th:if="${#fields.hasErrors('painos')}" th:errors="*{painos}"></p>
+			</div>
+				<input sec:authorize="hasAuthority('ADMIN')" type="submit" value="Lisää" class="btn btn-success"></input>
+				<a href="/kirjat" class="btn btn-default">Takaisin</a>
 			
 		</form>
-	
-	<!-- <div style="clear: both; display: block; height: 10px;"></div> -->
+	</div>
 	
 </body>
 </html>
